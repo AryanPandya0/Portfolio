@@ -232,6 +232,7 @@ body::before {
     margin-bottom: 2rem;
     background: linear-gradient(90deg, var(--accent-red) 0%, var(--accent-blue) 100%);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke: 1px #000;
 }
@@ -348,25 +349,6 @@ body::before {
 
 .project-info p {
     color: var(--text-muted);
-}
-
-/* About Section Refinement */
-.about-visual .abstract-shape {
-    filter: drop-shadow(10px 10px 0px #000);
-    border: var(--comic-border);
-    background: var(--surface-color);
-}
-
-.large-text {
-    font-size: 2rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    color: var(--text-color);
-    line-height: 1.2;
-    margin-bottom: 2rem;
-    background: linear-gradient(90deg, var(--accent-red) 0%, var(--accent-blue) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
 }
 
 /* Contact Section refinement */
