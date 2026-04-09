@@ -1,14 +1,15 @@
 :root {
-    --bg-color: #0d0d12;
-    --surface-color: #1a1a24;
-    --text-color: #ffffff;
-    --text-muted: #a0a0b8;
-    --accent-red: #ff0015;
-    --accent-blue: #0066ff;
-    --accent-dark-blue: #0a0a14;
+    --bg-color: #ffffff;
+    --surface-color: #f7f9ff;
+    --text-color: #0b0b15;
+    --text-muted: #5e5e7a;
+    --accent-red: #ff3838;
+    --accent-blue: #0088ff;
+    --accent-yellow: #ffcc00;
     --comic-border: 4px solid #000000;
-    --comic-shadow: 8px 8px 0px #000000;
-    --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    --comic-shadow: 10px 10px 0px #000000;
+    --panel-shadow: 10px 10px 0px var(--accent-blue);
+    --transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
     --container-width: 1200px;
 }
 
@@ -30,20 +31,21 @@ body {
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     background-image: 
-        linear-gradient(rgba(255, 0, 21, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 0, 21, 0.03) 1px, transparent 1px);
-    background-size: 50px 50px;
+        radial-gradient(var(--accent-blue) 0.5px, transparent 0.5px),
+        radial-gradient(var(--accent-red) 0.5px, transparent 0.5px);
+    background-size: 40px 40px;
+    background-position: 0 0, 20px 20px;
 }
 
-/* Halftone Pattern Overlay */
+/* Halftone Pattern Overlay - Joyful color */
 .noise-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: radial-gradient(#00000000 20%, #00000020 80%), radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 0);
-    background-size: 4px 4px;
+    background-image: radial-gradient(rgba(0, 136, 255, 0.05) 1px, transparent 0);
+    background-size: 6px 6px;
     pointer-events: none;
     z-index: 9999;
 }
@@ -57,8 +59,7 @@ body::before {
     width: 100%;
     height: 100%;
     background: 
-        radial-gradient(circle at 50% 50%, transparent 0%, rgba(10, 10, 20, 0.8) 100%),
-        repeating-conic-gradient(from 0deg, transparent 0deg 30deg, rgba(255, 255, 255, 0.02) 31deg) 50% 50% / 100% 100%;
+        repeating-conic-gradient(from 0deg, transparent 0deg 30deg, rgba(0, 0, 0, 0.02) 31deg) 50% 50% / 100% 100%;
     z-index: -1;
     pointer-events: none;
 }
@@ -108,17 +109,17 @@ body::before {
 
 .logo {
     font-family: 'Bangers', cursive;
-    font-size: 2.5rem;
-    color: var(--text-color);
+    font-size: 2.8rem;
+    color: #000;
     text-decoration: none;
     letter-spacing: 2px;
-    text-shadow: 4px 4px 0px var(--accent-red);
-    transform: rotate(-5deg);
+    text-shadow: 4px 4px 0px var(--accent-yellow);
+    transform: rotate(-3deg);
     display: inline-block;
 }
 
 .logo span {
-    color: var(--accent-blue);
+    color: var(--accent-red);
 }
 
 .nav-links {
@@ -148,85 +149,51 @@ body::before {
     align-items: center;
     justify-content: center;
     text-align: center;
-    background: radial-gradient(circle at center, rgba(255, 0, 21, 0.1) 0%, var(--bg-color) 70%);
+    background: radial-gradient(circle at center, rgba(0, 136, 255, 0.1) 0%, var(--bg-color) 70%);
     position: relative;
     overflow: hidden;
 }
 
 .hero-tagline {
     font-size: 1.5rem;
-    color: var(--text-color);
+    color: #000;
     text-transform: uppercase;
-    letter-spacing: 4px;
-    margin-bottom: 1rem;
+    letter-spacing: 3px;
+    margin-bottom: 0.5rem;
     font-weight: 900;
-    background: var(--accent-red);
+    background: var(--accent-yellow);
     padding: 0.5rem 2rem;
     display: inline-block;
-    transform: skew(-10deg);
+    transform: skew(-15deg);
+    border: 3px solid #000;
 }
 
 .hero-title {
     font-family: 'Bangers', cursive;
-    font-size: clamp(5rem, 15vw, 12rem);
-    line-height: 0.85;
-    margin-bottom: 1.5rem;
-    color: var(--text-color);
+    font-size: clamp(5rem, 18vw, 14rem);
+    line-height: 0.8;
+    margin-bottom: 2rem;
+    color: #000;
     text-shadow: 
-        8px 8px 0px var(--accent-red),
-        16px 16px 0px var(--accent-blue);
-    -webkit-text-stroke: 2px #000;
+        10px 10px 0px var(--accent-red),
+        20px 20px 0px var(--accent-blue);
+    -webkit-text-stroke: 3px #000;
 }
 
 .hero-sub {
-    font-size: 1.4rem;
-    color: var(--text-color);
+    font-size: 1.6rem;
+    color: #000;
     max-width: 650px;
     margin: 0 auto;
-    font-weight: 700;
+    font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
-.scroll-indicator {
-    position: absolute;
-    bottom: 3rem;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    color: var(--text-muted);
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-.mouse {
-    width: 20px;
-    height: 35px;
-    border: 2px solid var(--border-color);
-    border-radius: 20px;
+/* Sections */
+.section {
+    padding: 10rem 0;
     position: relative;
-}
-
-.mouse::after {
-    content: '';
-    position: absolute;
-    top: 5px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 4px;
-    height: 8px;
-    background-color: var(--accent-color);
-    border-radius: 2px;
-    animation: scroll 2s infinite;
-}
-
-@keyframes scroll {
-    0% { transform: translate(-50%, 0); opacity: 1; }
-    100% { transform: translate(-50%, 15px); opacity: 0; }
 }
 
 /* About Section */
@@ -257,10 +224,16 @@ body::before {
 }
 
 .large-text {
-    font-size: 1.8rem;
-    font-weight: 500;
+    font-size: 2.2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: #000;
+    line-height: 1.1;
     margin-bottom: 2rem;
-    color: var(--text-color);
+    background: linear-gradient(90deg, var(--accent-red) 0%, var(--accent-blue) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 1px #000;
 }
 
 .about-text p:not(.large-text) {
@@ -274,10 +247,13 @@ body::before {
     justify-content: center;
 }
 
-.abstract-shape {
-    width: 100%;
-    max-width: 400px;
-    filter: drop-shadow(0 0 30px rgba(144, 13, 13, 0.2));
+.about-visual .abstract-shape {
+    filter: drop-shadow(15px 15px 0px var(--accent-yellow));
+    border: 5px solid #000;
+    background: #fff;
+    border-radius: 20px;
+    padding: 2rem;
+    transform: rotate(5deg);
 }
 
 /* Skills Section */
@@ -288,20 +264,25 @@ body::before {
 }
 
 .skill-card {
-    background: var(--surface-color);
+    background: #fff;
     border: var(--comic-border);
-    box-shadow: var(--comic-shadow);
+    box-shadow: 10px 10px 0px var(--accent-blue);
     padding: 3rem 2rem;
     transition: var(--transition);
     position: relative;
     overflow: hidden;
-    transform: skew(-2deg);
+    transform: rotate(-1deg);
+}
+
+.skill-card:nth-child(even) {
+    transform: rotate(1.5deg);
+    box-shadow: 10px 10px 0px var(--accent-red);
 }
 
 .skill-card:hover {
-    transform: translateY(-10px) skew(-2deg) scale(1.02);
-    box-shadow: 12px 12px 0px var(--accent-red);
-    background: var(--accent-dark-blue);
+    transform: translateY(-15px) scale(1.05) rotate(0deg);
+    box-shadow: 15px 15px 0px var(--accent-yellow);
+    background: var(--surface-color);
 }
 
 .skill-icon {
@@ -336,17 +317,17 @@ body::before {
 .project-image {
     aspect-ratio: 16/10;
     border: var(--comic-border);
-    box-shadow: 6px 6px 0px #000;
-    margin-bottom: 1.5rem;
+    box-shadow: 8px 8px 0px var(--accent-blue);
+    margin-bottom: 2rem;
     position: relative;
     overflow: hidden;
     transition: var(--transition);
 }
 
 .project-card:hover .project-image {
-    border-color: var(--accent-red);
-    transform: translate(-4px, -4px);
-    box-shadow: 10px 10px 0px var(--accent-red);
+    border-color: #000;
+    transform: translate(-8px, -8px);
+    box-shadow: 16px 16px 0px var(--accent-red);
 }
 
 .project-info .category {
@@ -390,46 +371,76 @@ body::before {
 
 /* Contact Section refinement */
 .contact-form-container {
-    background: var(--surface-color);
+    background: #fff;
     padding: 4rem;
     border: var(--comic-border);
-    box-shadow: var(--comic-shadow);
+    box-shadow: 10px 10px 0px var(--accent-yellow);
+}
+
+.form-group label {
+    display: block;
+    font-size: 1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.8rem;
+    color: #000;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    background: var(--surface-color);
+    border: 3px solid #000;
+    padding: 1.2rem;
+    color: #000;
+    font-family: inherit;
+    font-size: 1.1rem;
+    transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent-blue);
+    box-shadow: 5px 5px 0px #000;
 }
 
 .submit-btn {
     background: var(--accent-red);
     color: white;
     border: 4px solid #000;
-    padding: 1.2rem 3rem;
+    padding: 1.5rem 3rem;
     font-family: 'Bangers', cursive;
-    font-size: 1.5rem;
+    font-size: 2rem;
     text-transform: uppercase;
     letter-spacing: 2px;
     cursor: pointer;
     transition: var(--transition);
     width: 100%;
-    box-shadow: 4px 4px 0px #000;
+    box-shadow: 6px 6px 0px #000;
 }
 
 .submit-btn:hover {
-    transform: translate(-4px, -4px);
-    box-shadow: 8px 8px 0px #000;
-    background: var(--accent-blue);
+    transform: translate(-6px, -6px);
+    box-shadow: 12px 12px 0px var(--accent-blue);
+    background: var(--accent-yellow);
+    color: #000;
 }
 
 /* Spider-Man Effects */
 .custom-cursor {
-    width: 30px;
-    height: 30px;
-    border: 2px solid var(--accent-red);
+    width: 32px;
+    height: 32px;
+    border: 3px solid #000;
     border-radius: 50%;
     position: fixed;
     pointer-events: none;
     z-index: 10000;
     transform: translate(-50%, -50%);
     transition: width 0.2s, height 0.2s;
-    background: radial-gradient(circle, var(--accent-red) 10%, transparent 80%);
-    mix-blend-mode: screen;
+    background: radial-gradient(circle, var(--accent-red) 30%, var(--accent-blue) 70%, transparent 80%);
+    box-shadow: 4px 4px 0px #000;
 }
 
 body:active .custom-cursor {
@@ -458,9 +469,10 @@ body:active .custom-cursor {
 .action-text {
     position: fixed;
     font-family: 'Bangers', cursive;
-    font-size: 3rem;
+    font-size: 3.5rem;
     color: #fff;
-    text-shadow: 4px 4px 0px var(--accent-red);
+    -webkit-text-stroke: 2px #000;
+    text-shadow: 6px 6px 0px var(--accent-red);
     pointer-events: none;
     z-index: 10001;
     transform: rotate(var(--rotate)) scale(0);
@@ -476,14 +488,16 @@ body:active .custom-cursor {
 /* Footer Upgrade */
 .footer {
     padding: 6rem 0;
-    background: var(--accent-dark-blue);
+    background: var(--accent-yellow);
     border-top: var(--comic-border);
+    text-align: center;
 }
 
 .footer p {
     font-family: 'Bangers', cursive;
-    font-size: 1.5rem;
-    color: var(--text-color);
+    font-size: 2rem;
+    color: #000;
+    transform: rotate(-1deg);
 }
 
 /* Media Queries */

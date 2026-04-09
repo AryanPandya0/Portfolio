@@ -36,8 +36,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Web Shoot Interaction
     document.addEventListener('mousedown', (e) => {
+        const actions = ['THWIP!', 'BOOM!', 'POW!', 'WHAM!', 'ZAP!', 'CRUNCH!'];
+        const randomAction = actions[Math.floor(Math.random() * actions.length)];
         createWebBurst(e.clientX, e.clientY);
-        showActionText('THWIP!', e.clientX, e.clientY);
+        showActionText(randomAction, e.clientX, e.clientY);
     });
 
     function createWebBurst(x, y) {
