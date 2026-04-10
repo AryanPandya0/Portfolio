@@ -124,7 +124,8 @@ document.addEventListener('DOMContentLoaded', () => {
         el.className = 'action-text';
         el.innerText = text;
         el.style.left = `${x}px`;
-        el.style.top = `${y - 50}px`;
+        el.style.top = `${y}px`;
+        el.style.setProperty('--rotate', `${Math.random() * 40 - 20}deg`);
         document.body.appendChild(el);
         
         setTimeout(() => el.remove(), 800);
