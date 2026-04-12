@@ -1,15 +1,17 @@
 :root {
-    --bg-color: #050508;
-    --surface-color: #0d0d12;
+    --bg-color: #020205;
+    --surface-color: #0a0a0f;
     --text-color: #ffffff;
-    --text-muted: #a0a0b8;
-    --accent-red: #ff1a1a;
-    --accent-blue: #0077ff;
-    --accent-yellow: #ffcc00;
-    --comic-border: 4px solid #ffffff;
-    --comic-shadow: 10px 10px 0px #ffffff;
-    --panel-shadow: 10px 10px 0px var(--accent-blue);
-    --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    --text-muted: #8a8aab;
+    --spidey-red: #DE0606;
+    --spidey-blue-dark: #1A237E;
+    --spidey-blue-glow: #00D2FF;
+    --spidey-yellow: #FFD700;
+    --accent-red: var(--spidey-red);
+    --accent-blue: var(--spidey-blue-glow);
+    --comic-border: 3px solid #ffffff;
+    --comic-shadow: 8px 8px 0px var(--spidey-red);
+    --transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
     --container-width: 1200px;
 }
 
@@ -33,7 +35,7 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* Premium Web Background */
+/* Premium Web Background with Halftone */
 .noise-overlay {
     position: fixed;
     top: 0;
@@ -41,11 +43,10 @@ body {
     width: 100%;
     height: 100%;
     background-image: 
-        radial-gradient(var(--accent-blue) 0.5px, transparent 0.5px),
-        radial-gradient(var(--accent-red) 0.5px, transparent 0.5px);
-    background-size: 60px 60px;
-    background-position: 0 0, 30px 30px;
-    opacity: 0.1;
+        radial-gradient(var(--spidey-blue-glow) 0.5px, transparent 0.5px),
+        url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 60px 60px, 40px 40px;
+    opacity: 0.15;
     pointer-events: none;
     z-index: 9999;
 }
@@ -58,8 +59,8 @@ body::before {
     width: 100%;
     height: 100%;
     background: 
-        linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)),
-        repeating-conic-gradient(from 0deg, transparent 0deg 30deg, rgba(255, 255, 255, 0.03) 31deg) 50% 50% / 100% 100%;
+        linear-gradient(rgba(2, 2, 5, 0.9), rgba(2, 2, 5, 0.95)),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     z-index: -1;
     pointer-events: none;
 }
@@ -97,13 +98,19 @@ body::before {
     color: #fff;
     text-decoration: none;
     letter-spacing: 2px;
-    text-shadow: 4px 4px 0px var(--accent-red);
+    text-shadow: 4px 4px 0px var(--spidey-red);
     transform: rotate(-3deg);
     display: inline-block;
+    transition: var(--transition);
+}
+
+.logo:hover {
+    transform: rotate(0deg) scale(1.1);
+    text-shadow: 0 0 20px var(--spidey-blue-glow);
 }
 
 .logo span {
-    color: var(--accent-blue);
+    color: var(--spidey-blue-glow);
 }
 
 .nav-links {
@@ -142,16 +149,50 @@ body::before {
     width: 100%;
 }
 
-/* Hero Section */
+/* Hero Section Refactor */
 .hero {
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    background: radial-gradient(circle at center, rgba(0, 119, 255, 0.15) 0%, var(--bg-color) 70%);
     position: relative;
     overflow: hidden;
+    background-image: url('assets/Spider-Man background.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(2, 2, 5, 0.4) 0%, rgba(2, 2, 5, 0.95) 100%);
+    z-index: 1;
+}
+
+.hero .container {
+    position: relative;
+    z-index: 10;
+}
+
+.spidey-badge {
+    position: absolute;
+    top: 5rem;
+    right: 5rem;
+    width: 200px;
+    z-index: 100;
+    transform: rotate(5deg);
+    filter: drop-shadow(0 0 15px rgba(0,0,0,0.5));
+    transition: var(--transition);
+    pointer-events: none;
+}
+
+.spidey-badge:hover {
+    transform: rotate(2deg) scale(1.05);
 }
 
 .hero-tagline {
@@ -220,15 +261,23 @@ body::before {
     text-transform: uppercase;
     letter-spacing: 2px;
     line-height: 1;
+    position: relative;
+    display: inline-block;
 }
 
 .section-title::after {
     content: '';
     display: block;
-    width: 120px;
-    height: 8px;
-    background-color: var(--accent-blue);
-    margin-top: 1rem;
+    width: 100%;
+    height: 15px;
+    background: repeating-linear-gradient(
+        45deg,
+        var(--spidey-red),
+        var(--spidey-red) 10px,
+        var(--spidey-blue-glow) 10px,
+        var(--spidey-blue-glow) 20px
+    );
+    margin-top: 0.5rem;
     transform: skew(-20deg);
 }
 
@@ -628,6 +677,49 @@ body::before {
     font-family: 'Bangers', cursive;
     font-size: 2rem;
     color: var(--text-muted);
+}
+
+/* Sticker Animations */
+.sticker {
+    pointer-events: none;
+    transition: transform 0.3s ease;
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(var(--rot, 0deg)); }
+    50% { transform: translateY(-15px) rotate(calc(var(--rot, 0deg) + 5deg)); }
+}
+
+.s1 { --rot: 5deg; animation-delay: 0s; }
+.s2 { --rot: -15deg; animation-delay: 1s; }
+.s3 { --rot: -5deg; animation-delay: 2s; }
+.s4 { --rot: -10deg; animation-delay: 3s; }
+
+.s-hanging {
+    animation: hang 4s ease-in-out infinite;
+    transform-origin: top center;
+}
+
+@keyframes hang {
+    0%, 100% { transform: rotate(5deg); }
+    50% { transform: rotate(-5deg); }
+}
+
+.contact-themed {
+    background-image: linear-gradient(rgba(2, 2, 5, 0.9), rgba(2, 2, 5, 0.8)), url('assets/spidey_3.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+}
+
+.contact-themed::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at center, transparent, rgba(0,0,0,0.4));
+    pointer-events: none;
 }
 
 @media (max-width: 992px) {

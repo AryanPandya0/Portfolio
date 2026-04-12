@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isHeroZone) {
             shootWebLines(e.clientX, e.clientY);
         } else {
-            const actions = ['THWIP!', 'BOOM!', 'POW!', 'WHAM!', 'ZAP!', 'CRUNCH!', 'SNAP!', 'WEB!'];
+            const actions = ['THWIP!', 'SWISH!', 'WEB-UP!', 'FLING!', 'GO WEB GO!', 'ZAP!', 'CRACK!', 'THOK!'];
             const randomAction = actions[Math.floor(Math.random() * actions.length)];
             showActionText(randomAction, e.clientX, e.clientY);
         }
@@ -45,50 +45,34 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function shootWebLines(x, y) {
-        // Create a small web "trap" decal at the click location
-        const trap = document.createElement('div');
-        trap.className = 'web-trap';
+        const web = document.createElement('img');
+        web.src = 'assets/spidey_websoot.png';
+        web.className = 'web-trap';
         
-        // Use an SVG for a realistic web look
-        trap.innerHTML = `
-            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <style>
-                    path { 
-                        stroke: white; 
-                        stroke-width: 1.5; 
-                        fill: none; 
-                        stroke-linecap: round;
-                        opacity: 0.8;
-                    }
-                </style>
-                <!-- Radial webs -->
-                <path d="M50 0 L50 100 M0 50 L100 50 M15 15 L85 85 M85 15 L15 85" />
-                <path d="M50 20 Q60 20 71 29 Q80 40 80 50 Q80 60 71 71 Q60 80 50 80 Q40 80 29 71 Q20 60 20 50 Q20 40 29 29 Q40 20 50 20" />
-                <path d="M50 5 Q70 5 82 18 Q95 30 95 50 Q95 70 82 82 Q70 95 50 95 Q30 95 18 82 Q5 70 5 50 Q5 30 18 18 Q30 5 50 5" />
-                <!-- Random sticky bits -->
-                <circle cx="50" cy="50" r="3" fill="white" opacity="0.9" />
-                <circle cx="20" cy="20" r="2" fill="white" opacity="0.6" />
-                <circle cx="80" cy="80" r="2" fill="white" opacity="0.6" />
-                <circle cx="80" cy="20" r="1.5" fill="white" opacity="0.5" />
-                <circle cx="20" cy="80" r="1.5" fill="white" opacity="0.5" />
-            </svg>
-        `;
+        const size = 150 + Math.random() * 100;
+        web.style.width = `${size}px`;
+        web.style.height = 'auto';
+        web.style.left = `${x}px`;
+        web.style.top = `${y}px`;
+        web.style.position = 'fixed';
+        web.style.pointerEvents = 'none';
+        web.style.zIndex = '9998';
+        web.style.transform = `translate(-50%, -50%) rotate(${Math.random() * 360}deg) scale(0)`;
+        web.style.transition = 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
         
-        const size = 60 + Math.random() * 60;
-        trap.style.width = `${size}px`;
-        trap.style.height = `${size}px`;
-        trap.style.left = `${x}px`;
-        trap.style.top = `${y}px`;
-        trap.style.transform = `translate(-50%, -50%) rotate(${Math.random() * 360}deg)`;
+        document.body.appendChild(web);
         
-        document.body.appendChild(trap);
+        // Animate in
+        requestAnimationFrame(() => {
+            web.style.transform = `translate(-50%, -50%) rotate(${Math.random() * 360}deg) scale(1)`;
+        });
         
         // Decay and remove
         setTimeout(() => {
-            trap.style.opacity = '0';
-            trap.style.transform = `translate(-50%, -50%) rotate(${Math.random() * 360}deg) scale(0.8)`;
-            setTimeout(() => trap.remove(), 1000);
-        }, 2000); // Stays on page for a bit as requested
+            web.style.opacity = '0';
+            web.style.transform += ' scale(0.8)';
+            setTimeout(() => web.remove(), 1000);
+        }, 2000);
     }
 
     function createClickPulse(x, y) {
