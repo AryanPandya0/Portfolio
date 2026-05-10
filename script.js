@@ -149,4 +149,102 @@ document.addEventListener('DOMContentLoaded', () => {
         cursor.style.left = `${e.clientX}px`;
         cursor.style.top = `${e.clientY}px`;
     });
+
+    // 6. Photo Reveal Effect (Canvas-based)
+    const revealFrame = document.getElementById('reveal-frame');
+    const revealCanvas = document.getElementById('reveal-canvas');
+    
+    if (revealFrame && revealCanvas) {
+        const frontImg = revealFrame.querySelector('.front-photo');
+        const ctx = revealCanvas.getContext('2d');
+        let isHovering = false;
+        let mouseX = 0;
+        let mouseY = 0;
+        const REVEAL_RADIUS = 80;
+        const FEATHER = 35;
+
+        function resizeCanvas() {
+            const rect = revealFrame.getBoundingClientRect();
+            revealCanvas.width = rect.width;
+            revealCanvas.height = rect.height;
+        }
+
+        function drawReveal() {
+            if (!isHovering) return;
+            
+            const w = revealCanvas.width;
+            const h = revealCanvas.height;
+            
+            ctx.clearRect(0, 0, w, h);
+            
+            // Draw the front image onto the canvas (Cover effect)
+            const imgW = frontImg.naturalWidth;
+            const imgH = frontImg.naturalHeight;
+            const imgRatio = imgW / imgH;
+            const canvasRatio = w / h;
+            
+            let sx, sy, sWidth, sHeight;
+            
+            if (imgRatio > canvasRatio) {
+                // Image is wider than canvas
+                sHeight = imgH;
+                sWidth = imgH * canvasRatio;
+                sx = (imgW - sWidth) / 2;
+                sy = 0;
+            } else {
+                // Image is taller than canvas
+                sWidth = imgW;
+                sHeight = imgW / canvasRatio;
+                sx = 0;
+                sy = (imgH - sHeight) / 2;
+            }
+            
+            ctx.drawImage(frontImg, sx, sy, sWidth, sHeight, 0, 0, w, h);
+            
+            // Create radial gradient for the hole
+            const gradient = ctx.createRadialGradient(
+                mouseX, mouseY, REVEAL_RADIUS - FEATHER,
+                mouseX, mouseY, REVEAL_RADIUS + FEATHER
+            );
+            gradient.addColorStop(0, 'rgba(0,0,0,1)');
+            gradient.addColorStop(1, 'rgba(0,0,0,0)');
+            
+            // Cut the hole using destination-out
+            ctx.globalCompositeOperation = 'destination-out';
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(mouseX, mouseY, REVEAL_RADIUS + FEATHER, 0, Math.PI * 2);
+            ctx.fill();
+            
+            ctx.globalCompositeOperation = 'source-over';
+            
+            requestAnimationFrame(drawReveal);
+        }
+
+        // Wait for front image to load
+        frontImg.addEventListener('load', resizeCanvas);
+        window.addEventListener('resize', resizeCanvas);
+        
+        // Initial resize
+        setTimeout(resizeCanvas, 500);
+
+        revealFrame.addEventListener('mouseenter', () => {
+            isHovering = true;
+            frontImg.style.visibility = 'hidden';
+            resizeCanvas();
+            drawReveal();
+        });
+
+        revealFrame.addEventListener('mouseleave', () => {
+            isHovering = false;
+            frontImg.style.visibility = 'visible';
+            ctx.clearRect(0, 0, revealCanvas.width, revealCanvas.height);
+        });
+
+        revealFrame.addEventListener('mousemove', (e) => {
+            const rect = revealFrame.getBoundingClientRect();
+            mouseX = e.clientX - rect.left;
+            mouseY = e.clientY - rect.top;
+        });
+    }
 });

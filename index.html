@@ -58,17 +58,20 @@
                 </div>
                 <div class="about-grid">
                     <div class="about-text reveal">
-                        <p class="large-text">I am a multi-disciplinary designer dedicated to <span>building visual
-                                languages</span> that resonate.</p>
-                        <p>My philosophy is grounded in minimalism: stripping away the noise to find the core message.
-                            Driven by curiosity and inspired by the intricate patterns of digital ecosystems, I blend
-                            artistic intent with functional precision.</p>
-                        <p>Every pixel has a purpose; every line tells a story. I don't just design; I weave connections
-                            between brands and people.</p>
+                        <p class="large-text">I’m Aryan Pandya. <span> designer, developer,<br> brand builder </span>
+                            passionate
+                            about creating digital experiences that leave a lasting impression.</p>
+                        <p>I specialize in crafting visually striking interfaces, memorable brand identities, and
+                            innovative websites that blend design, technology, and storytelling.</p>
+                        <p>I believe great design is more than aesthetics—it builds emotion, trust, and identity. My
+                            goal is to help individuals and businesses create strong digital brands that stand out and
+                            connect with their audience.</p>
                     </div>
                     <div class="about-visual reveal">
-                        <div class="photo-frame">
-                            <img src="assets/spidey_main.jpg" alt="Aryan Pandya">
+                        <div class="photo-frame" id="reveal-frame">
+                            <img src="assets/Aryan.jpeg" alt="Aryan Pandya" class="back-photo">
+                            <img src="assets/spidey_main.jpg" alt="Aryan Pandya" class="front-photo">
+                            <canvas id="reveal-canvas"></canvas>
                             <div class="frame-overlay"></div>
                         </div>
                         <img src="assets/mini_spidey_2.png" alt="" class="sticker s2"
@@ -84,7 +87,8 @@
             <div class="container">
                 <div class="section-header" style="display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;">
                     <h2 class="section-title reveal">Capabilities</h2>
-                    <img src="assets/spidey_2.jpg" alt="" class="sticker s-title-icon" style="width: 150px; border: 4px solid var(--spidey-red); transform: rotate(5deg); box-shadow: 10px 10px 0px rgba(0,0,0,0.5); border-radius: 10px;">
+                    <img src="assets/spidey_2.jpg" alt="" class="sticker s-title-icon"
+                        style="width: 150px; border: 4px solid var(--spidey-red); transform: rotate(5deg); box-shadow: 10px 10px 0px rgba(0,0,0,0.5); border-radius: 10px;">
                 </div>
                 <div class="skills-grid">
                     <div class="skill-card reveal">
@@ -118,9 +122,37 @@
                 </div>
                 <div class="project-grid">
                     <!-- Work Box Empty for now -->
-                    <div
-                        style="grid-column: 1 / -1; height: 300px; border: 2px dashed rgba(255, 255, 255, 0.1); display: flex; align-items: center; justify-content: center; color: var(--text-muted);">
-                        <p>AUTHENTICATING MULTIVERSE ACCESS... WORK LOADING</p>
+                    <div class="project-card reveal">
+                        <a href="https://github.com/AryanPandya0/Replexity" target="_blank" class="repo-link" title="View Repository" style="top: 1rem; right: 1rem;">
+                            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7a3.37 3.37 0 0 0-.94 2.58V22"></path></svg>
+                        </a>
+                        <div class="project-info">
+                            <span class="category">AI & Research</span>
+                            <h3>Replexity</h3>
+                            <p>An AI-powered research assistant designed to help users search, analyze, and summarize information quickly. Intelligent automation with a clean interface.</p>
+                        </div>
+                    </div>
+
+                    <div class="project-card reveal">
+                        <a href="https://github.com/AryanPandya0/CollegeConnect" target="_blank" class="repo-link" title="View Repository" style="top: 1rem; right: 1rem;">
+                            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7a3.37 3.37 0 0 0-.94 2.58V22"></path></svg>
+                        </a>
+                        <div class="project-info">
+                            <span class="category">Collaboration Platform</span>
+                            <h3>CollegeConnect</h3>
+                            <p>A student-focused platform that streamlines communication and collaboration within colleges. Integrated announcements and resource sharing.</p>
+                        </div>
+                    </div>
+
+                    <div class="project-card reveal">
+                        <a href="https://github.com/AryanPandya0/WG2_Pixel_Dungeon" target="_blank" class="repo-link" title="View Repository" style="top: 1rem; right: 1rem;">
+                            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7a3.37 3.37 0 0 0-.94 2.58V22"></path></svg>
+                        </a>
+                        <div class="project-info">
+                            <span class="category">Game Development</span>
+                            <h3>Pixel Dungeon</h3>
+                            <p>A retro-style 2D dungeon adventure game built with engaging gameplay mechanics and pixel art visuals. Interactive level design.</p>
+                        </div>
                     </div>
                 </div>
                 <img src="assets/spidey_0.png" alt="" class="sticker s3"
@@ -135,9 +167,18 @@
                         <h2 class="section-title">Let's Connect</h2>
                         <p>Ready to build the next identity? Reach out for collaborations or just a coffee.</p>
                         <div class="social-links">
-                            <a href="#">TW</a>
-                            <a href="#">IG</a>
-                            <a href="#">LI</a>
+                            <a href="https://instagram.com/pandya_aryan_0_/" target="_blank" class="social-btn" title="Instagram">
+                                <img src="assets/Logos/Instagram.png" alt="Instagram">
+                            </a>
+                            <a href="https://linkedin.com/in/pandyaaryan" target="_blank" class="social-btn" title="LinkedIn">
+                                <img src="assets/Logos/linkedIn.png" alt="LinkedIn">
+                            </a>
+                            <a href="https://reddit.com/user/AryanPandya/" target="_blank" class="social-btn" title="Reddit">
+                                <img src="assets/Logos/Reddit.png" alt="Reddit">
+                            </a>
+                            <a href="https://x.com/Aryan_Pandya295" target="_blank" class="social-btn" title="X (Twitter)">
+                                <img src="assets/Logos/X.png" alt="X">
+                            </a>
                         </div>
                     </div>
                     <div class="contact-form-container reveal">
